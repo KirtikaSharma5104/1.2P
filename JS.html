@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favorite Chocolate Form</title>
+</head>
+<body>
+    <h1>Favorite Chocolate Form</h1>
+    <form onsubmit="return submitForm()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" required>
+        <br><br>
+
+        <label for="chocolate">Select your favorite chocolate:</label>
+        <select id="chocolate" required>
+            <option value="">Choose One</option>
+            <option value="Dark Chocolate">Dark Chocolate</option>
+            <option value="Milk Chocolate">Milk Chocolate</option>
+            <option value="White Chocolate">White Chocolate</option>
+        </select>
+        <br><br>
+
+        <label for="quantity">Enter the quantity you like:</label>
+        <input type="number" id="quantity" min="1" max="10" required>
+        <br><br>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+        <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="confirmation" style="display: none;">
+        <h2>Thank you for your submission!</h2>
+        <p>Name: <span id="confirmationName"></span></p>
+        <p>Age: <span id="confirmationAge"></span></p>
+        <p>Favorite Chocolate: <span id="confirmationChocolate"></span></p>
+        <p>Quantity: <span id="confirmationQuantity"></span></p>
+        <p>Date: <span id="confirmationDate"></span></p>
+    </div>
+
+    <script>
+        function submitForm() {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let chocolate = document.getElementById("chocolate").value;
+            let quantity = document.getElementById("quantity").value;
+            let date = document.getElementById("date").value;
+
+            showConfirmation(name, age, chocolate, quantity, date);
+            return false; // Prevent form submission to keep confirmation message visible
+        }
+
+        function showConfirmation(name, age, chocolate, quantity, date) {
+            document.getElementById("confirmationName").textContent = name;
+            document.getElementById("confirmationAge").textContent = age;
+            document.getElementById("confirmationChocolate").textContent = chocolate;
+            document.getElementById("confirmationQuantity").textContent = quantity;
+            document.getElementById("confirmationDate").textContent = formatDate(date);
+
+            document.getElementById("confirmation").style.display = "block";
+        }
+
+        function formatDate(date) {
+            const options = { year: "numeric", month: "long", day: "numeric" };
+            return new Date(date).toLocaleDateString(undefined, options);
+        }
+    </script>
+</body>
+</html>
